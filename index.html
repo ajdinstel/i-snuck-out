@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<HTML>
+    <HEAD>
+        <TITLE>I Snuck Out</TITLE>
+
+        <style>
+            html {
+                height: 100%;
+            }
+            body {
+                background-color: orange;
+                font-family: sans-serif;
+                color: white;
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                text-align: center;
+            }
+            .container {
+                min-height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+            .pet-grid {
+                opacity: 0;
+                transition: all .75s linear;
+            }
+            .visible {
+                opacity: 1;
+            }
+            #button1 {
+                padding: 30px;
+                border: 2px solid white;
+                color: white;
+                background-color: rgba(0,0,0,0);
+                font-size: 16px;
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 2px;
+                border-radius: 10px;
+            }
+            #button1:hover{
+                cursor: pointer;
+                border: 3px solid white;
+            }
+            #button1:active, #button1:focus {
+                outline: none;
+            }
+            h2 {
+                text-transform: uppercase;
+            }
+            p {
+                text-align: left;
+            }
+            .title {
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                margin: 0;
+                padding: 0;
+                font-size: 40px;
+                font-family: serif;
+                color: rgba(255,255,255,0.3);
+            }
+            .pet-profile-grid{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .pet-profile {
+                flex: 1 1 300px;
+                margin: 20px;
+                min-width: 200px;
+                max-width: 400px;
+                flex-basis: auto;
+                flex-grow: 1;
+                border: 2px solid white;
+                padding: 15px;
+            }
+            h3 {
+                text-transform: uppercase;
+            }
+
+
+        </style>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js"></script>
+        <script type="text/x-handlebars-template" id="pet-profile">
+
+            <br/><br/><br/>
+            <h3>Contact Us</h3>
+
+            <div>
+                {{feed.entry.1.gsx$contact1.$t}} &#8226;
+                {{feed.entry.1.gsx$phone1.$t}} &#8226;
+                {{feed.entry.1.gsx$email1.$t}}
+            </div>
+
+            <div>
+                {{feed.entry.1.gsx$contact2.$t}} &#8226;
+                {{feed.entry.1.gsx$phone2.$t}} &#8226;
+                {{feed.entry.1.gsx$email2.$t}}
+            </div>
+            <div>
+                {{feed.entry.1.gsx$addressline1.$t}} &#8226; {{feed.entry.1.gsx$city.$t}}, {{feed.entry.1.gsx$state.$t}} &#8226; {{feed.entry.1.gsx$zipcode.$t}}
+            </div>
+            <br/><br/><br/>
+            <div class="pet-profile-grid">
+                {{#each feed.entry}}
+                    <div class="pet-profile">
+                        <div>
+                            <img style="width: 100%" src="http://www.amandas-sandbox.com/images/{{gsx$name.$t}}.jpg"/>
+                        </div>
+                        <h2>{{gsx$name.$t}}</h2>
+                        <p>Description:  {{gsx$description.$t}}</p>
+                        <p>Age:  {{gsx$age.$t}}</p>
+                        <p>Sex:  {{gsx$sex.$t}}</p>
+                        <p>Color:  {{gsx$primarycolor.$t}}</p>
+                        <p>Weight:  {{gsx$weight.$t}}</p>
+                        <p>Notes:  {{gsx$notes.$t}}</p>
+                    </div>
+
+                {{/each}}
+            </div>
+        </script>
+        <script src="js/script.js"></script>
+
+    </HEAD>
+    <BODY>
+
+        <h1 class="title">i-snuck-out</h1>
+
+        <div class="container">
+            <input id="button1" type="button" value="I think I found your dog." onclick="loadPetData()"/>
+            <div class="pet-grid"></div>
+        </div>
+
+    </BODY>
+</HTML>
